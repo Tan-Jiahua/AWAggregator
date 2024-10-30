@@ -1,0 +1,45 @@
+Package: AWAggregator
+Title: Attribute-Weighted Aggregation
+Version: 0.0.0.9000
+Authors@R: 
+    c(
+        person(given = "Jiahua",
+            family = "Tan",
+            email = "jiahuatan@chem.ubc.ca",
+            role = c("aut", "cre")
+        ),
+        person(given = "Gian L.",
+            family = "Negri",
+            email = "gnegri@bcgsc.ca",
+            role = c("aut")
+        ),
+        person(given = "Gregg B.",
+            family = "Morin",
+            email = "gmorin@bcgsc.ca",
+            role = c("aut")
+        ),
+        person(given = "David D. Y.",
+            family = "Chen",
+            email = "chen@chem.ubc.ca",
+            role = c("aut")
+        )
+    )
+Description: This package is used for the implementation of Attribute-Weighted Aggregation, an aggregation method which can leverage PSM attributes to improve the quantification in the aggregation step.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports: 
+    dplyr,
+    Peptides,
+    progress,
+    purrr,
+    ranger,
+    stats,
+    stringr,
+    tidyr,
+    toOrdinal
+Depends: 
+    R (>= 2.10)
+LazyData: true
+LazyDataCompression: xz
