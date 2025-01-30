@@ -8,7 +8,8 @@ aggregate_by_attributes(
   PSM,
   col_of_reporter_ion_int,
   ranger = NULL,
-  pred_error = NULL
+  pred_error = NULL,
+  ratio_calc = F
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ aggregate_by_attributes(
 \item{ranger}{The random forest model to be applied for aggregation.}
 
 \item{pred_error}{The predicted level of inaccuracy for the PSMs, obtained from external sources. Either the \code{ranger} model or \code{pred_error} must be specified.}
+
+\item{ratio_calc}{A logical value indicating whether relative reporter intensities are calculated using the total reporter intensities across all channels.}
 }
 \value{
 A data frame containing protein abundance estimates.

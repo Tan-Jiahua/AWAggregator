@@ -4,14 +4,16 @@
 #' @param col_of_reporter_ion_int A vector of column names representing reporter ion intensities across different channels.
 #' @param ranger The random forest model to be applied for aggregation.
 #' @param pred_error The predicted level of inaccuracy for the PSMs, obtained from external sources. Either the `ranger` model or `pred_error` must be specified.
+#' @param ratio_calc A logical value indicating whether relative reporter intensities are calculated using the total reporter intensities across all channels.
 #' @return A data frame containing protein abundance estimates.
 #' @importFrom dplyr across group_by summarize %>%
 #' @importFrom ranger ranger
 #' @importFrom stats weighted.mean
+#' @importFrom tidyr all_of
 #' @export
 
 
-aggregate_by_attributes = function(PSM, col_of_reporter_ion_int, ranger = NULL, pred_error = NULL){
+aggregate_by_attributes = function(PSM, col_of_reporter_ion_int, ranger = NULL, pred_error = NULL, ratio_calc = F){
 
   if(missing(PSM)){
     stop('Variable "PSM" needs to be assigned')
@@ -57,10 +59,12 @@ aggregate_by_attributes = function(PSM, col_of_reporter_ion_int, ranger = NULL, 
       warning(paste0(cnt4, ' protein(s) have (has) ', cnt3, ' PSM(s) but they (it) do(es) not have any PSMs without missing attributes. Their (its) abundance is estimated by the average of the corresponding PSM reporter ion intensities.'))
     }
   }
-  PSM[, col_of_reporter_ion_int] = t(apply(PSM[, col_of_reporter_ion_int], MARGIN = 1, FUN = function(X) X / sum(X)))
+  if(ratio_calc){
+    PSM[, col_of_reporter_ion_int] = t(apply(PSM[, col_of_reporter_ion_int], MARGIN = 1, FUN = function(X) X / sum(X)))
+  }
   PSM[, col_of_reporter_ion_int] = log2(PSM[, col_of_reporter_ion_int])
   PSM$Weight = 1 / pred_error
-  prot_norm = group_by(PSM, Protein) %>% summarize(across(col_of_reporter_ion_int, ~weighted.mean(., Weight, na.rm = T)))
+  prot_norm = group_by(PSM, Protein) %>% summarize(across(all_of(col_of_reporter_ion_int), ~weighted.mean(., Weight, na.rm = T)))
   prot_norm[, col_of_reporter_ion_int] = 2^prot_norm[, col_of_reporter_ion_int]
   return(prot_norm)
 }

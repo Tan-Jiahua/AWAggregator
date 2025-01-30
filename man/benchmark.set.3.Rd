@@ -18,7 +18,7 @@ A data frame with 21783 rows and 19 variables:
 \item{Assigned Modifications}{Post-translational modifications within the identified sequence}
 \item{Purity}{The proportion of total ion abundance in the inclusion window from the precursor}
 \item{Protein}{Protein sequence header corresponding to the identified peptide sequence}
-\item{H1+Y0_1, H1+Y1_1, H1+Y5_1, H1+Y10_1, H1+Y10_2, H1+Y5_2, H1+Y1_2, H1+Y0_2}{Reporter ion intensities for various samples. For example, "H1+Y5_1" represents the reporter ion intensity for the first replicate (_1) of the group H1+Y5, which contains a constant level of human proteins (H1) and a spiking of yeast proteins (Y5) at five times the base level}
+\item{H1+Y0_1, H1+Y1_1, H1+Y5_1, H1+Y10_1, H1+Y10_2, H1+Y5_2, H1+Y1_2, H1+Y0_2}{Processed reporter ion intensities for various samples. For example, "H1+Y5_1" represents the reporter ion intensity for the first replicate (_1) of the group H1+Y5, which contains a constant level of human proteins (H1) and a spiking of yeast proteins (Y5) at five times the base level}
 }
 }
 \usage{

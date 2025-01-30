@@ -18,7 +18,7 @@ A data frame with 118 rows and 20 variables:
 \item{Assigned Modifications}{Post-translational modifications within the identified sequence}
 \item{Purity}{The proportion of total ion abundance in the inclusion window from the precursor}
 \item{Protein}{Protein sequence header corresponding to the identified peptide sequence}
-\item{Sample 1, Sample 2, Sample 3, Sample 4, Sample 5, Sample 6, Sample 7, Sample 8, Sample 9}{Reporter ion intensities from sample 1 to 9}
+\item{Sample 1, Sample 2, Sample 3, Sample 4, Sample 5, Sample 6, Sample 7, Sample 8, Sample 9}{Processed reporter ion intensities from sample 1 to 9}
 }
 }
 \usage{

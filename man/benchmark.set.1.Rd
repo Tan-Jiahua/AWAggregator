@@ -18,7 +18,7 @@ A data frame with 175293 rows and 21 variables:
 \item{Assigned Modifications}{Post-translational modifications within the identified sequence}
 \item{Purity}{The proportion of total ion abundance in the inclusion window from the precursor}
 \item{Protein}{Protein sequence header corresponding to the identified peptide sequence}
-\item{H1+E1_1, H1+E1_2, H1+E1_3, H1+E2_1, H1+E2_2, H1+E2_3, H1+E2_4, H1+E6_1, H1+E6_2, H1+E6_3}{Reporter ion intensities for various samples. For example, "H1+E2_1" represents the reporter ion intensity for the first replicate (_1) of the group H1+E2, which contains a constant level of human proteins (H1) and a spiking of E. coli proteins (E2) at twice the base level}
+\item{H1+E1_1, H1+E1_2, H1+E1_3, H1+E2_1, H1+E2_2, H1+E2_3, H1+E2_4, H1+E6_1, H1+E6_2, H1+E6_3}{Processed reporter ion intensities for various samples. For example, "H1+E2_1" represents the reporter ion intensity for the first replicate (_1) of the group H1+E2, which contains a constant level of human proteins (H1) and a spiking of E. coli proteins (E2) at twice the base level}
 }
 }
 \usage{

@@ -18,7 +18,7 @@ A data frame with 19566 rows and 21 variables:
 \item{Assigned Modifications}{Post-translational modifications within the identified sequence}
 \item{Purity}{The proportion of total ion abundance in the inclusion window from the precursor}
 \item{Protein}{Protein sequence header corresponding to the identified peptide sequence}
-\item{H1+Y1_1, H1+Y4_1, H1+Y10_1, H1+Y1_2, H1+Y4_2, H1+Y10_2, H1+Y1_3, H1+Y4_3, H1+Y10_3}{Reporter ion intensities for various samples. For example, "H1+Y4_1" represents the reporter ion intensity for the first replicate (_1) of the group H1+Y4, which contains a constant level of human proteins (H1) and a spiking of yeast proteins (Y4) at four times the base level}
+\item{H1+Y1_1, H1+Y4_1, H1+Y10_1, H1+Y1_2, H1+Y4_2, H1+Y10_2, H1+Y1_3, H1+Y4_3, H1+Y10_3}{Processed reporter ion intensities for various samples. For example, "H1+Y4_1" represents the reporter ion intensity for the first replicate (_1) of the group H1+Y4, which contains a constant level of human proteins (H1) and a spiking of yeast proteins (Y4) at four times the base level}
 \item{Replicate}{The mass spectrometry run where the PSM is detected}
 }
 }

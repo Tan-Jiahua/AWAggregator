@@ -19,7 +19,7 @@ A data frame with 128 rows and 21 variables:
 \item{Isolation Interference in Percent}{The percentage of interference by co-isolation within the precursor isolation window}
 \item{Average Reporter SN}{The average reporter S/N values}
 \item{XCorr}{Scores the number of fragment ions that are common to two different peptides with the same precursor mass and calculates the cross-correlation score for all candidate peptides queried from the database}
-\item{Sample 1, Sample 2, Sample 3, Sample 4, Sample 5, Sample 6, Sample 7, Sample 8, Sample 9}{Reporter ion intensities from sample 1 to 9}
+\item{Sample 1, Sample 2, Sample 3, Sample 4, Sample 5, Sample 6, Sample 7, Sample 8, Sample 9}{Processed reporter ion intensities from sample 1 to 9}
 }
 }
 \usage{
