@@ -1,7 +1,7 @@
 Package: AWAggregator
 Type: Package
 Title: Attribute-Weighted Aggregation
-Version: 0.99.1
+Version: 0.99.2
 Authors@R:
     c(
         person(given = "Jiahua",
@@ -35,7 +35,6 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Suggests:
-    AWAggregatorData,
     BiocStyle,
     knitr,
     rmarkdown,
