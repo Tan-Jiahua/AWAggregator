@@ -15,28 +15,37 @@ getAvgScaledErrorOfLog2FC(
 \arguments{
 \item{PSM}{A data frame containing all PSMs used for training.}
 
-\item{colOfReporterIonInt}{A vector of column names for reporter ion intensities across different channels.}
+\item{colOfReporterIonInt}{A vector of column names for reporter ion
+intensities across different channels.}
 
 \item{groups}{A vector specifying sample groups.}
 
-\item{expectedRelativeAbundance}{A named list where group names are keys and the corresponding expected relative abundance values for species at varying concentrations are provided as values. Unknown ratios can be designated as NA.}
+\item{expectedRelativeAbundance}{A named list where group names are keys and
+the corresponding expected relative abundance values for species at varying
+concentrations are provided as values. Unknown ratios can be designated as
+NA.}
 
-\item{speciesAtConstLevel}{A string specifying the species that are spiked in at a constant level.}
+\item{speciesAtConstLevel}{A string specifying the species that are spiked
+in at a constant level.}
 }
 \value{
-A data frame containing PSMs with Average Scaled Error of log2FC values required for the random forest model.
+A data frame containing PSMs with Average Scaled Error of log2FC
+values required for the random forest model.
 }
 \description{
-Calculates the Average Scaled Error of log2FC values required for training sets.
+Calculates the Average Scaled Error of log2FC values required
+for training sets.
 }
 \examples{
 library(ExperimentHub)
+library(stringr)
 eh <- ExperimentHub()
 benchmarkSet1 <- eh[['EH9637']]
-samples <- c('H1+E1_1', 'H1+E1_2', 'H1+E1_3', 'H1+E2_1',
-    'H1+E2_2', 'H1+E2_3', 'H1+E2_4', 'H1+E6_1', 'H1+E6_2', 'H1+E6_3')
-groups <- c('H1+E1', 'H1+E1', 'H1+E1', 'H1+E2',
-    'H1+E2', 'H1+E2', 'H1+E2', 'H1+E6', 'H1+E6', 'H1+E6')
+# Load sample names (Sample 'H1+E1_1' ~ Sample 'H1+E6_3')
+samples <- colnames(benchmarkSet1)[
+    grep('H1[+]E[0-9]+_[1-4]', colnames(benchmarkSet1))
+]
+groups <- str_match(samples, 'H1[+]E[0-9]+')[, 1]
 PSM <- getAvgScaledErrorOfLog2FC(
     PSM=benchmarkSet1,
     colOfReporterIonInt=samples,

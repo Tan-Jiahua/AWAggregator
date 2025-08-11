@@ -7,23 +7,27 @@
 convertPDFormat(PSM, protein, colOfReporterIonInt)
 }
 \arguments{
-\item{PSM}{A data frame containing the PSM table from Proteome Discoverer to be converted.}
+\item{PSM}{A data frame containing the PSM table from Proteome Discoverer to
+be converted.}
 
-\item{protein}{A data frame containing the corresponding protein table from Proteome Discoverer.}
+\item{protein}{A data frame containing the corresponding protein table from
+Proteome Discoverer.}
 
-\item{colOfReporterIonInt}{A vector of column names for reporter ion intensities across different channels.}
+\item{colOfReporterIonInt}{A vector of column names for reporter ion
+intensities across different channels.}
 }
 \value{
 A data frame in the format required by AWAggregator.
 }
 \description{
-Converts output from Proteome Discoverer into the input format required by AWAggregator.
+Converts output from Proteome Discoverer into the input format
+required by AWAggregator.
 }
 \examples{
 data(sample.PSM.PD)
 data(sample.prot.PD)
-samples <- c('Sample 1', 'Sample 2', 'Sample 3', 'Sample 4',
-    'Sample 5', 'Sample 6', 'Sample 7', 'Sample 8', 'Sample 9')
+# Load sample names (Sample 1 ~ Sample 9)
+samples <- colnames(sample.PSM.PD)[grep('Sample', colnames(sample.PSM.PD))]
 df <- convertPDFormat(
     PSM=sample.PSM.PD,
     protein=sample.prot.PD,

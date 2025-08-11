@@ -7,24 +7,35 @@
 getDistMetric(PSM, channel, setProgressBar = TRUE)
 }
 \arguments{
-\item{PSM}{A data frame containing the PSMs for which distance metrics are to be calculated.}
+\item{PSM}{A data frame containing the PSMs for which distance metrics are
+to be calculated.}
 
-\item{channel}{A vector specifying the channels used for calculating the distance metric.}
+\item{channel}{A vector specifying the channels used for calculating the
+distance metric.}
 
-\item{setProgressBar}{A logical value indicating whether to display a progress bar.}
+\item{setProgressBar}{A logical value indicating whether to display a
+progress bar.}
 }
 \value{
 A vector of distance metrics for the specified PSMs.
 }
 \description{
-Calculates the distance metric for PSMs.
+Calculates the distance metric for PSMs. Distance metric
+reflects on whether the quantified ratio of each pair of samples of a PSM
+diverges from other PSMs in the same redundant/unique group. Redundant
+group, unique group and distance metric were originally defined in the iPQF
+method. Please refer to "iPQF: a new peptide-to-protein summarization method
+using peptide spectra characteristics to improve protein quantification" for
+more details.
 }
 \examples{
 library(ExperimentHub)
 eh <- ExperimentHub()
 benchmarkSet3 <- eh[['EH9639']]
-samples <- c('H1+Y0_1', 'H1+Y1_1', 'H1+Y5_1',
-    'H1+Y10_1', 'H1+Y10_2', 'H1+Y5_2', 'H1+Y1_2', 'H1+Y0_2')
+# Load sample names (Sample 'H1+Y0_1' ~ Sample 'H1+Y10_2')
+samples <- colnames(benchmarkSet3)[
+    grep('H1[+]Y[0-9]+_[1-2]', colnames(benchmarkSet3))
+]
 df <- getDistMetric(
     PSM=benchmarkSet3,
     channel=samples,

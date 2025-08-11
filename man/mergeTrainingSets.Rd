@@ -7,17 +7,22 @@
 mergeTrainingSets(PSMList, numPSMs, setProgressBar = TRUE)
 }
 \arguments{
-\item{PSMList}{A named list where dataset names are keys and the corresponding data frames of PSMs used for training are values.}
+\item{PSMList}{A named list where dataset names are keys and the
+corresponding data frames of PSMs used for training are values.}
 
-\item{numPSMs}{The minimum number of PSMs to extract from each dataset for merging.}
+\item{numPSMs}{The minimum number of PSMs to extract from each dataset for
+merging.}
 
-\item{setProgressBar}{A logical value indicating whether to display a progress bar.}
+\item{setProgressBar}{A logical value indicating whether to display a
+progress bar.}
 }
 \value{
-A data frame containing the merged PSM table from a subset of each input dataset.
+A data frame containing the merged PSM table from a subset of each
+input dataset.
 }
 \description{
-Extracts a similar number of PSMs from each input dataset and merges them into a single training set.
+Extracts a similar number of PSMs from each input dataset and
+merges them into a single training set.
 }
 \examples{
 library(ExperimentHub)
@@ -31,6 +36,8 @@ PSM <- mergeTrainingSets(
         `Benchmark Set 2`=benchmarkSet2,
         `Benchmark Set 3`=benchmarkSet3
     ),
-    numPSMs=min(nrow(benchmarkSet1), nrow(benchmarkSet2), nrow(benchmarkSet3)),
+    numPSMs=min(
+        nrow(benchmarkSet1), nrow(benchmarkSet2), nrow(benchmarkSet3)
+    ),
 )
 }

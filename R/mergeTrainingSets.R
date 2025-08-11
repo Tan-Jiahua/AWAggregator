@@ -1,9 +1,14 @@
 #' Merge Training Sets
-#' @description Extracts a similar number of PSMs from each input dataset and merges them into a single training set.
-#' @param PSMList A named list where dataset names are keys and the corresponding data frames of PSMs used for training are values.
-#' @param numPSMs The minimum number of PSMs to extract from each dataset for merging.
-#' @param setProgressBar A logical value indicating whether to display a progress bar.
-#' @return A data frame containing the merged PSM table from a subset of each input dataset.
+#' @description Extracts a similar number of PSMs from each input dataset and
+#' merges them into a single training set.
+#' @param PSMList A named list where dataset names are keys and the
+#' corresponding data frames of PSMs used for training are values.
+#' @param numPSMs The minimum number of PSMs to extract from each dataset for
+#' merging.
+#' @param setProgressBar A logical value indicating whether to display a
+#' progress bar.
+#' @return A data frame containing the merged PSM table from a subset of each
+#' input dataset.
 #' @importFrom dplyr bind_rows mutate
 #' @import progress
 #' @importFrom purrr reduce
@@ -21,7 +26,9 @@
 #'         `Benchmark Set 2`=benchmarkSet2,
 #'         `Benchmark Set 3`=benchmarkSet3
 #'     ),
-#'     numPSMs=min(nrow(benchmarkSet1), nrow(benchmarkSet2), nrow(benchmarkSet3)),
+#'     numPSMs=min(
+#'         nrow(benchmarkSet1), nrow(benchmarkSet2), nrow(benchmarkSet3)
+#'     ),
 #' )
 #' @export
 
@@ -29,13 +36,27 @@
 mergeTrainingSets <- function(PSMList, numPSMs, setProgressBar=TRUE){
     if(is.null(names(PSMList))){
         for(i in seq_len(length(PSMList))){
-            message('The ', toOrdinal(i), ' PSM table in the list "PSMList" is not named and its name will be generated as "Dataset ', i, '".')
+            message(
+                'The ',
+                toOrdinal(i),
+                ' PSM table in the list "PSMList" is not named and its name ',
+                'will be generated as "Dataset ',
+                i,
+                '".'
+            )
             names(PSMList)[i] <- paste0('Dataset ', i)
         }
     }
     for(i in seq_len(length(PSMList))){
         if(is.null(names(PSMList)[i]) | names(PSMList)[i] == ''){
-            message('The ', toOrdinal(i), ' PSM table in the list "PSMList" is not named and its name will be generated as "Dataset ', i, '".')
+            message(
+                'The ',
+                toOrdinal(i),
+                ' PSM table in the list "PSMList" is not named and its name ',
+                'will be generated as "Dataset ',
+                i,
+                '".'
+            )
             names(PSMList)[i] <- paste0('Dataset ', i)
         }
     }
@@ -43,7 +64,11 @@ mergeTrainingSets <- function(PSMList, numPSMs, setProgressBar=TRUE){
     names(listOfSelectedPSMs) <- names(PSMList)
 
     if(setProgressBar){
-        pb <- progress_bar$new(format='[:bar] :current/:total (:percent) elapsed :elapsed eta :eta', total=length(PSMList) * numPSMs)
+        pb <- progress_bar$new(
+            format=
+                '[:bar] :current/:total (:percent) elapsed :elapsed eta :eta',
+            total=length(PSMList) * numPSMs
+        )
     }
     for(i in seq_len(length(PSMList))){
         PSM <- PSMList[[i]]
@@ -54,12 +79,19 @@ mergeTrainingSets <- function(PSMList, numPSMs, setProgressBar=TRUE){
 
         while(nrow(selectedPSMs) < numPSMs){
             if(setProgressBar){
-                pb$update((nrow(selectedPSMs) / numPSMs + i - 1) / length(PSMList))
+                pb$update(
+                    (nrow(selectedPSMs) / numPSMs + i - 1) / length(PSMList)
+                )
             }
             pickedIdx <- sample(seq_len(length(pickableProt)), 1)
             pickedProt <- pickableProt[pickedIdx]
             pickableProt <- pickableProt[-pickedIdx]
-            selectedPSMs <- rbind(selectedPSMs, PSM[PSM$Protein == pickedProt, ]) # Why rbind not bind_rows: https://stackoverflow.com/questions/42887217/difference-between-rbind-and-bind-rows-in-r
+            # Why rbind not bind_rows
+            # https://stackoverflow.com/questions/42887217/difference-between-rbind-and-bind-rows-in-r
+            selectedPSMs <- rbind(
+                selectedPSMs,
+                PSM[PSM$Protein == pickedProt, ]
+            )
         }
         listOfSelectedPSMs[[i]] <- selectedPSMs
         if(setProgressBar){
@@ -72,7 +104,10 @@ mergeTrainingSets <- function(PSMList, numPSMs, setProgressBar=TRUE){
 
     col <- reduce(lapply(listOfSelectedPSMs, colnames), intersect)
     PSM <- bind_rows(
-        lapply(names(listOfSelectedPSMs), FUN=function(X) mutate(listOfSelectedPSMs[[X]][, col], Dataset=X))
+        lapply(
+            names(listOfSelectedPSMs),
+            FUN=function(X) mutate(listOfSelectedPSMs[[X]][, col], Dataset=X)
+        )
     )
     return(PSM)
 }
