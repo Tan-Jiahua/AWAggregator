@@ -27,6 +27,11 @@
 #'     channel=samples,
 #'     setProgressBar=TRUE
 #' )
+#' @references
+#' Martina Fischer, Bernhard Y. Renard (2016).
+#' iPQF: A New Peptide-to-Protein Summarization Method Using Peptide Spectra
+#' Characteristics to Improve Protein Quantification.
+#' *Bioinformatics*, 32(7), 1040-1047.
 #' @export
 
 getDistMetric <- function(PSM, channel, setProgressBar=TRUE){
